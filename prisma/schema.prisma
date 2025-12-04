@@ -14,3 +14,18 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model player {
+  id        Int      @id @default(autoincrement())
+  name      String
+  goalCount     Int      @default(0)
+  birthDate DateTime
+  team      team     @relation(fields: [teamId], references: [id])
+  teamId    Int
+}
+
+model team {
+  id        Int      @id @default(autoincrement())
+  country      String
+  players     player[]
+}
